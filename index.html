@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Handmade Treasures - Gifts & Hampers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-primary: 'Montserrat', sans-serif;
+            --font-display: 'Playfair Display', serif;
+
+            --color-bg-main: #f0f0f0d3; /* Light beige background */
+            --color-text-body: #424242; /* Slightly darker for better contrast */
+            --color-text-subtle: #666666;
+            --color-text-light: #FFFFFF;
+
+            --color-primary: #732c2c; /* Main theme color - Muted Olive/Sage */
+            --color-primary-light: #c9765d; /* Lighter shade for nav, accents */
+            --color-primary-dark: #5C6B57;  /* Darker shade for titles, active states */
+            --color-primary-darker: #4D5C3C;
+
+            --color-accent-red: #E55039; /* For cart count, remove buttons */
+            --color-accent-red-dark: #C0392B;
+
+            --color-card-bg: #FFFFFF;
+            --color-card-border: #ECEEEB;
+            --color-input-border: #D1DCD0;
+            --color-input-bg: #FDFDFD;
+            --color-section-alt-bg: #F4F1EB; /* For reviews or distinct sections */
+
+            --shadow-soft: rgba(77, 92, 60, 0.08);
+            --shadow-medium: rgba(77, 92, 60, 0.12);
+            --shadow-strong: rgba(77, 92, 60, 0.16);
+
+            --border-radius-small: 4px;
+            --border-radius-medium: 8px;
+            --border-radius-large: 10px;
+
+            --transition-speed: 0.25s;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-weight: 400;
+            background-color: var(--color-bg-main);
+            margin: 0;
+            color: var(--color-text-body);
+            line-height: 1.75; /* Increased for better readability */
+        }
+
+        header {
+            background: var(--color-primary);
+            color: var(--color-text-light);
+            padding: 40px 20px; /* Increased padding */
+            text-align: center;
+            box-shadow: 0 3px 8px var(--shadow-soft);
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: 3.2em; /* Slightly larger */
+            margin: 0 0 12px 0;
+            letter-spacing: 2px; /* More pronounced spacing */
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin: 0;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        nav {
+            background: var(--color-primary-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px; /* Increased gap */
+            padding: 18px 15px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 2px 6px var(--shadow-soft);
+            position: sticky; /* Sticky nav */
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-weight: 500; /* Medium weight */
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-medium);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+
+        nav a:hover, nav a.active-nav {
+            background-color: var(--color-card-bg);
+            color: var(--color-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 1240px; /* Wider container */
+            margin: 40px auto;
+            padding: 0 30px; /* Increased side padding */
+        }
+
+        section {
+            display: none;
+            padding: 3rem 2rem; /* Generous padding */
+            background-color: var(--color-card-bg);
+            border-radius: var(--border-radius-large);
+            box-shadow: 0 6px 20px var(--shadow-soft);
+            margin-bottom: 45px;
+        }
+
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section h2, .section-title {
+            font-family: var(--font-display);
+            color: var(--color-primary-dark);
+            font-size: 2.6em; /* Larger titles */
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 18px;
+            font-weight: 700;
+        }
+
+        section h2::after, .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-primary-light); /* Consistent with nav */
+            border-radius: 2px;
+        }
+
+        footer {
+            background: var(--color-primary);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: 30px 1rem;
+            margin-top: 50px;
+            font-size: 0.95em;
+        }
+        footer p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            padding: 15px 20px; /* Increased padding */
+            width: calc(100% - 42px); /* Adjusted for padding */
+            margin-bottom: 20px;
+            border: 1px solid var(--color-input-border);
+            border-radius: var(--border-radius-medium);
+            font-family: var(--font-primary);
+            font-size: 1em;
+            box-sizing: border-box;
+            background-color: var(--color-input-bg);
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        textarea:focus {
+            border-color: var(--color-primary);
+            outline: none;
+            box-shadow: 0 0 0 3.5px rgba(138, 154, 91, 0.25); /* Softer, larger focus ring */
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        button, .button {
+            background: var(--color-primary);
+            color: var(--color-text-light);
+            border: none;
+            padding: 15px 30px; /* Generous padding */
+            cursor: pointer;
+            border-radius: var(--border-radius-medium);
+            font-weight: 600; /* Semibold */
+            font-size: 1em;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 2px 5px var(--shadow-soft);
+            letter-spacing: 0.5px;
+        }
+
+        button:hover, .button:hover {
+            background: var(--color-primary-darker);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px var(--shadow-medium);
+        }
+
+        /* Secondary button style (e.g., View Details, Continue Shopping) */
+        .button-secondary {
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 1.5px solid var(--color-primary);
+            box-shadow: none;
+        }
+        .button-secondary:hover {
+            background-color: rgba(138, 154, 91, 0.05); /* Very subtle bg on hover */
+            color: var(--color-primary-darker);
+            border-color: var(--color-primary-darker);
+            box-shadow: 0 2px 5px var(--shadow-soft);
+        }
+
+
+        /* Product Specific Styling */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Larger minmax */
+            gap: 35px; /* Increased gap */
+            margin-top: 30px;
+        }
+
+        .product {
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--border-radius-large); /* More rounded cards */
+            padding: 30px; /* Increased padding */
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow-soft);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product:hover {
+            transform: translateY(-8px); /* More pronounced lift */
+            box-shadow: 0 10px 25px var(--shadow-medium);
+        }
+
+        .product img {
+            max-width: 100%;
+            height: 240px; /* Larger image */
+            object-fit: cover;
+            border-radius: var(--border-radius-medium);
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 1px solid var(--color-card-border);
+        }
+
+        .product h3 {
+            font-family: var(--font-display);
+            font-size: 1.7em; /* Slightly larger */
+            color: var(--color-primary-dark);
+            margin: 10px 0 15px 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .product p.price {
+            font-size: 1.3em;
+            color: var(--color-primary);
+            font-weight: 700; /* Bolder price */
+            margin-bottom: 20px;
+        }
+
+        .product .actions {
+            margin-top: auto;
+            padding-top: 15px;
+        }
+
+        .product .actions button, .product .actions .button {
+            margin: 8px 5px; /* Adjusted margin */
+            padding: 12px 22px; /* Slightly smaller for card actions */
+            font-size: 0.9em;
+        }
+        /* Styles for .product .actions .button:first-of-type are handled by .button-secondary */
+
+
+        /* Form Specific Styling */
+        form {
+            max-width: 600px; /* Wider forms */
+            margin: 30px auto 0 auto;
+        }
+        form p a { /* For Sign Up link */
+            color: var(--color-primary);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        form p a:hover {
+            color: var(--color-primary-darker);
+        }
+
+
+        /* Product Detail View Styling */
+        #product-detail-view {
+            padding: 40px; /* Increased padding */
+        }
+
+        #product-detail-view .product-detail-content {
+            display: flex;
+            gap: 40px; /* Increased gap */
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        #product-detail-view .product-detail-image {
+            flex: 1 1 380px; /* Adjusted flex basis */
+            max-width: 480px;
+        }
+
+        #product-detail-view img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--color-card-border);
+            box-shadow: 0 5px 18px var(--shadow-soft);
+        }
+
+        #product-detail-view .product-detail-info {
+            flex: 2 1 420px; /* Adjusted flex basis */
+        }
+
+        #product-detail-view h2 { /* Product Title */
+            text-align: left;
+            font-size: 2.8em; /* Larger title */
+            margin-bottom: 20px;
+            padding-bottom: 0;
+            color: var(--color-primary-dark);
+        }
+         #product-detail-view h2::after { /* No underline for product detail title */
+            display: none;
+         }
+
+        #product-detail-view .price {
+            font-size: 2em; /* Larger price */
+            color: var(--color-primary);
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        #product-detail-view .description {
+            font-size: 1.1em; /* Slightly larger */
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: var(--color-text-body);
+        }
+
+        #product-detail-view .back-button {
+            margin-bottom: 25px; /* Space below back button if product details are long */
+             /* background-color: var(--color-primary-light); Consistent with nav for secondary actions */
+        }
+        /* #product-detail-view .back-button:hover {
+            background-color: var(--color-primary);
+        } */
+        #product-detail-view #detailAddToCartBtn { /* Primary button style */
+            padding: 16px 38px;
+            font-size: 1.1em;
+        }
+
+        /* Home Page Specific Sections */
+        #home > p { /* Welcome paragraph */
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            font-size: 1.15em;
+            color: var(--color-text-subtle);
+        }
+        .featured-products-container {
+            margin-top: 50px;
+            padding: 35px 30px; /* Increased padding */
+            background-color: rgba(255,255,255, 0.7); /* Slightly transparent white over primary bg */
+            border-radius: var(--border-radius-large);
+        }
+
+        .customer-reviews-container {
+            margin-top: 50px;
+            padding: 40px 30px;
+            background-color: var(--color-section-alt-bg);
+            border-radius: var(--border-radius-large);
+        }
+
+        .reviews-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Larger review cards */
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .review-item {
+            background-color: var(--color-card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius-medium);
+            border: 1px solid var(--color-card-border);
+            box-shadow: 0 4px 12px var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .review-item blockquote {
+            margin: 0 0 18px 0;
+            font-style: italic;
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.65;
+            padding-left: 20px;
+            border-left: 3.5px solid var(--color-primary-light); /* Thematic border */
+            flex-grow: 1;
+        }
+
+        .review-item .reviewer-name {
+            font-weight: 600; /* Semibold name */
+            text-align: right;
+            color: var(--color-primary);
+            font-size: 0.95em;
+            margin-top: auto; /* Pushes name to bottom if blockquote varies in height */
+        }
+
+        /* Cart Icon in Nav */
+        .cart-icon-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .cart-icon {
+            font-size: 1.35em; /* Slightly larger emoji */
+            margin-left: 8px;
+            line-height: 1;
+        }
+        .cart-count {
+            position: absolute;
+            top: -9px;
+            right: -11px;
+            background-color: var(--color-accent-red);
+            color: var(--color-text-light);
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 0.75em; /* Slightly larger count text */
+            font-weight: 700;
+            min-width: 14px;
+            text-align: center;
+            line-height: 1.1;
+            border: 2px solid var(--color-card-bg); /* Border matching nav hover */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        }
+
+        /* Shopping Cart Section Styling */
+        #cart #cartContent { /* Container for cart items */
+            margin-bottom: 30px;
+        }
+        #cart .cart-item {
+            display: flex;
+            align-items: flex-start; /* Align items to top for better text flow */
+            gap: 30px; /* Increased gap */
+            padding: 25px 0; /* Increased padding */
+            border-bottom: 1px solid var(--color-card-border);
+        }
+        #cart .cart-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        #cart .cart-item img {
+            width: 110px; /* Larger image */
+            height: 110px;
+            object-fit: cover;
+            border-radius: var(--border-radius-medium);
+            border: 1px solid var(--color-card-border);
+            flex-shrink: 0; /* Prevent image from shrinking */
+        }
+        #cart .cart-item-details-wrapper { /* New wrapper for all text and actions */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        #cart .cart-item-info {
+            margin-bottom: 12px; /* Space before quantity/actions */
+        }
+        #cart .cart-item-info h4 { /* Product name in cart */
+            margin: 0 0 8px 0;
+            font-family: var(--font-display);
+            color: var(--color-primary-dark);
+            font-size: 1.4em; /* Larger item name */
+            font-weight: 700;
+            line-height: 1.3;
+        }
+         #cart .cart-item-info p.unit-price { /* Price per unit */
+            margin: 0;
+            font-size: 0.95em;
+            color: var(--color-text-subtle);
+        }
+
+        #cart .cart-item-controls { /* Wrapper for quantity and remove */
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Space between quantity and remove */
+            margin-bottom: 12px;
+        }
+
+        #cart .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        #cart .cart-item-quantity button {
+            padding: 7px 13px;
+            font-size: 1em;
+            background-color: #F0F0F0; /* Lighter, neutral background */
+            color: var(--color-text-body);
+            border: 1px solid var(--color-input-border);
+            box-shadow: none;
+            line-height: 1;
+            font-weight: 600;
+        }
+         #cart .cart-item-quantity button:hover {
+            background-color: #E5E5E5;
+            border-color: #ccc;
+         }
+        #cart .cart-item-quantity span { /* Quantity number */
+            font-weight: 600;
+            font-size: 1.15em;
+            min-width: 30px;
+            text-align: center;
+            color: var(--color-text-body);
+        }
+        #cart .cart-item-subtotal { /* Subtotal for the item */
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--color-text-body);
+            text-align: right; /* Align subtotal to the right of its column if needed */
+            margin-top: auto; /* Push to bottom of flex column */
+            padding-left: 20px; /* To align with controls if wrapped */
+        }
+
+        #cart .cart-item-remove button {
+            background-color: transparent;
+            color: var(--color-accent-red);
+            padding: 6px 0px; /* Minimal padding, rely on text */
+            font-size: 0.9em;
+            border: none;
+            text-decoration: underline;
+            box-shadow: none;
+            font-weight: 500;
+        }
+        #cart .cart-item-remove button:hover {
+            color: var(--color-accent-red-dark);
+            background-color: transparent;
+        }
+        /* Cart summary section */
+        #cart .cart-summary-actions {
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 1px solid var(--color-card-border);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Align total and buttons to the right */
+        }
+        #cart .cart-total {
+            font-size: 1.6em; /* Larger total */
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: 25px;
+        }
+        #cart .cart-actions .button {
+            margin-left: 15px;
+            padding: 16px 32px; /* Standard button size */
+        }
+        #cart .cart-actions .button:first-child { /* For "Continue Shopping" */
+             margin-left: 0;
+        }
+        #cart .empty-cart-message {
+            text-align:center;
+            padding: 35px 20px;
+            font-size: 1.2em;
+        }
+        #cart .empty-cart-message p {
+            margin-bottom: 25px;
+            color: var(--color-text-subtle);
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) { /* Tablet and larger mobile */
+            .container { padding: 0 20px; }
+            section { padding: 2.5rem 1.5rem; }
+            header h1 { font-size: 2.8em; }
+            section h2, .section-title { font-size: 2.3em; }
+            .product-gallery { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+            #product-detail-view .product-detail-image { max-width: 420px; }
+            #product-detail-view .product-detail-info { flex-basis: 380px; }
+
+            #cart .cart-item { gap: 20px; }
+            #cart .cart-item img { width: 90px; height: 90px; }
+            #cart .cart-item-info h4 { font-size: 1.25em; }
+            #cart .cart-item-subtotal { font-size: 1.1em; }
+        }
+
+        @media (max-width: 768px) { /* Smaller tablets and mobile */
+            body { line-height: 1.7; }
+            header { padding: 30px 15px; }
+            header h1 { font-size: 2.4em; letter-spacing: 1.5px;}
+            header p { font-size: 1.1em; }
+            nav { gap: 12px; padding: 15px 10px; }
+            nav a { padding: 9px 14px; font-size: 0.9em; }
+            .container { padding: 0 15px; margin-top: 30px; }
+            section { padding: 2rem 1rem; margin-bottom: 35px;}
+            section h2, .section-title { font-size: 2em; margin-bottom: 25px; padding-bottom: 15px; }
+            section h2::after, .section-title::after { width: 70px; height: 2.5px; }
+
+            input[type="text"], input[type="email"], input[type="password"], textarea { padding: 14px 16px; margin-bottom: 16px;}
+            button, .button { padding: 14px 26px; font-size: 0.95em;}
+
+            .product-gallery { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+            .product { padding: 20px; }
+            .product img { height: 200px; }
+            .product h3 { font-size: 1.5em; }
+            .product p.price { font-size: 1.2em; }
+
+            #product-detail-view { padding: 30px; }
+            #product-detail-view .product-detail-content { flex-direction: column; gap: 30px; }
+            #product-detail-view .product-detail-image,
+            #product-detail-view .product-detail-info { flex: 1 1 100%; max-width: 100%; }
+            #product-detail-view h2 { font-size: 2.3em;}
+            #product-detail-view .price { font-size: 1.8em;}
+            #product-detail-view #detailAddToCartBtn { padding: 15px 30px; font-size: 1em; }
+
+
+            .reviews-gallery { grid-template-columns: 1fr; gap: 25px; }
+            .review-item { padding: 25px; }
+
+            #cart .cart-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+             #cart .cart-item img { margin-bottom: 18px; }
+            #cart .cart-item-details-wrapper { width: 100%; align-items: center; }
+            #cart .cart-item-controls { justify-content: center; width: 100%; }
+            #cart .cart-item-subtotal { text-align: center; margin-top: 10px; width: 100%; padding-left: 0;}
+            #cart .cart-summary-actions { align-items: center; }
+            #cart .cart-actions { display: flex; flex-direction: column; width: 100%; max-width: 320px; }
+            #cart .cart-actions .button { width: 100%; margin-left: 0; margin-bottom: 12px; }
+            #cart .cart-actions .button:last-child { margin-bottom: 0; }
+            #cart .cart-total { font-size: 1.4em; }
+        }
+
+        @media (max-width: 480px) { /* Small mobile */
+            header h1 { font-size: 2.1em; letter-spacing: 1px;}
+            header p { font-size: 1em; }
+            nav { flex-direction: column; align-items: stretch; }
+            nav a { text-align: center; }
+            section { padding: 1.8rem 1rem; }
+            section h2, .section-title { font-size: 1.8em; }
+            .product img { height: 200px; } /* Keep image height decent */
+            .product h3 {font-size: 1.4em;}
+            .product p.price {font-size: 1.15em;}
+            .cart-icon { font-size: 1.25em; }
+            .cart-count { font-size: 0.7em; padding: 2.5px 6px; top: -7px; right: -9px; }
+            #cart .cart-total { font-size: 1.3em; }
+        }
+
+        /* Add to Cart Notification Style */
+        .cart-notification {
+            position: fixed;
+            bottom: 20px; /* Changed to bottom */
+            left: 50%;     /* Center it */
+            transform: translateX(-50%); /* Center it */
+            background-color: var(--color-primary-dark);
+            color: var(--color-text-light);
+            padding: 12px 25px;
+            border-radius: var(--border-radius-medium);
+            box-shadow: 0 3px 8px var(--shadow-medium);
+            z-index: 1001; /* Ensure it's above nav if nav is also fixed/sticky */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.4s ease-in-out;
+            transform: translateX(-50%) translateY(20px); /* Start slightly lower for entry animation */
+        }
+        .cart-notification.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Handmade Treasures</h1>
+    <p>Gifts and Hampers Crafted with Love & Care</p>
+</header>
+
+<nav>
+    <a onclick="showSection('home', this)" class="active-nav">Home</a>
+    <a onclick="showSection('about', this)">About Us</a>
+    <a onclick="showSection('products', this)">Products</a>
+    <a onclick="showSection('contact', this)">Contact</a>
+    <a onclick="showSection('login', this)">Login</a>
+    <a onclick="showSection('cart', this)" class="cart-icon-container">
+        Cart <span class="cart-icon">🛒</span>
+        <span class="cart-count" id="cartItemCount">0</span>
+    </a>
+</nav>
+
+<div class="container">
+    <section id="home" class="active">
+        <h2 class="section-title">Welcome to Handmade Treasures</h2>
+        <p>Discover beautiful, made-to-order gift hampers and personalized presents for every occasion. Each item is thoughtfully curated, eco-friendly, and handmade with the utmost care and love. Let us help you find the perfect expression of your affection.</p>
+
+        <div class="featured-products-container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-gallery" id="featuredProductGallery">
+                </div>
+        </div>
+
+        <div class="customer-reviews-container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="reviews-gallery">
+                <div class="review-item">
+                    <blockquote>"Absolutely loved the custom hamper! The attention to detail was amazing, and it made the perfect birthday gift. Everything felt so personal and high quality."</blockquote>
+                    <p class="reviewer-name">- Vayu Shukla.</p>
+                </div>
+                <div class="review-item">
+                    <blockquote>"The Personalised Scrapbook was such a thoughtful and unique present. My friend was thrilled! Highly recommend for anyone looking for something special."</blockquote>
+                    <p class="reviewer-name">- Sakshi Zunje.</p>
+                </div>
+                <div class="review-item">
+                    <blockquote>"Quality bahaut achi thi, aur packaging bhi bahaut achi thi, konse bhi product ko koi damage nahi hua, aur jo saaman use kiye the wo bahaut ache quality ke the. Will definitely order again."</blockquote>
+                    <p class="reviewer-name">- Vanshika Lad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">Our Story</h2>
+        <p style="font-size: 1.1em; line-height: 1.8; color: var(--color-text-subtle); text-align: justify; max-width: 850px; margin: 0 auto;">Handmade Treasures began with a simple passion: creating gifts that truly resonate and come from the heart. We believe that the most cherished presents are those that carry a personal touch and tell a story. In a world of mass-produced items, we strive to offer something unique and meaningful.</p>
+        <p style="font-size: 1.1em; line-height: 1.8; color: var(--color-text-subtle); text-align: justify; max-width: 850px; margin: 1.5em auto 0 auto;">Our journey is one of creativity, dedication to craftsmanship, and a deep appreciation for sustainable practices. Every item we craft is designed with eco-consciousness in mind, from sourcing materials to our packaging. We pour our dedication into ensuring that each treasure you find here is not only beautiful but also ethically made and special.</p>
+    </section>
+
+    <section id="products">
+        <h2 class="section-title">Our Handmade Collection</h2>
+        <div class="product-gallery" id="productGallery">
+            </div>
+    </section>
+
+    <section id="product-detail-view">
+        <div class="product-detail-content">
+            <div class="product-detail-image">
+                <img id="detailImg" src="" alt="Product Image">
+            </div>
+            <div class="product-detail-info">
+                <button class="button button-secondary back-button" onclick="goBackToProducts()">← Back to Products</button>
+                <h2 id="detailName"></h2>
+                <p class="price" id="detailPrice"></p>
+                <p class="description" id="detailDescription"></p>
+                <button id="detailAddToCartBtn" class="button">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="cart">
+        <h2 class="section-title">Your Shopping Cart</h2>
+        <div id="cartContent">
+            </div>
+
+        <div id="emptyCartMessage" class="empty-cart-message" style="display:none;">
+            <p>Your shopping cart is currently empty.</p>
+            <button onclick="showSection('products', document.querySelector('nav a[onclick*=\'products\']'))" class="button">Discover Our Treasures</button>
+        </div>
+
+        <div id="cartSummaryActions" class="cart-summary-actions" style="display:none;"> <div id="cartTotal" class="cart-total">
+                Total: ₹<span>0.00</span>
+            </div>
+            <div id="cartActions" class="cart-actions">
+                <button onclick="showSection('products', document.querySelector('nav a[onclick*=\'products\']'))" class="button button-secondary">Continue Shopping</button>
+                <button onclick="alert('Checkout functionality to be implemented! This would typically lead to a payment page.')" class="button">Proceed to Checkout</button>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <p style="text-align: center; margin-bottom: 35px; font-size: 1.1em; color: var(--color-text-subtle);">Have a question, a custom request, or just want to say hello? We'd love to hear from you!</p>
+        <form onsubmit="event.preventDefault(); document.getElementById('contactForm').reset(); alert('Thank you for your message! We will get back to you soon.');" id="contactForm">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="6" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <section id="login">
+        <h2 class="section-title">Login / Sign Up</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username or Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p style="text-align: center; margin-top: 20px; font-size: 0.95em;">Don't have an account? <a href="#" onclick="alert('Sign up functionality to be implemented!')">Sign Up Here</a></p>
+        </form>
+    </section>
+</div>
+
+<footer>
+    <p>© <span id="currentYear"></span> Handmade Treasures. All Rights Reserved. Crafted with passion.</p>
+</footer>
+
+<script>
+    // --- PRODUCT DATA ---
+    const productsData = [
+        {
+            id: 'p1',
+            name: 'Custom Sweet Hamper',
+            price: 900.00,
+            imageSrc: 'Image/Photo (1).png',
+            altText: 'A beautifully arranged custom Sweets gift hamper',
+            description: 'Our Elegant Custom Hamper is tailored to your preferences. Choose from a selection of artisanal chocolates, gourmet snacks, and sweets to create a truly unique and personal gift. Perfect for birthdays, anniversaries, or as a special thank you. Each item is carefully selected for its quality and charm.',
+            featured: true
+        },
+        {
+            id: 'p2',
+            name: 'Classic Gift Hamper',
+            price: 550.00,
+            imageSrc: 'Image/Photo (2).png',
+            altText: 'A classic gift hamper with assorted goodies',
+            description: 'The Classic Gift Hamper is a delightful collection of popular treats and small gifts, beautifully packaged. It includes a mix of sweets , a gift of choice , eg. Phone case , etc , and a personalized note card option. A versatile choice for any occasion,= guaranteed to bring a smile.',
+            featured: true
+        },
+        {
+            id: 'p3',
+            name: 'Personalized Scrapbook',
+            price: 275.00,
+            imageSrc: 'Image/Photo (3).png',
+            altText: 'Personalized scrapbook',
+            description: 'Capture precious moments with our Personalized scrapbooks. This unique gift includes a handmade scrapbook, with photos of choice, gift compartments, and a selection of treats to enjoy while reminiscing. Ideal for anniversaries, farewells, or celebrating milestones.',
+            featured: false
+        },
+        {
+            id: 'p4',
+            name: 'Personalized key chains',
+            price: 120.00,
+            imageSrc: 'Image/Photo (4).png',
+            altText: 'A personalized key chain with a unique design',
+            description: 'Our Personalized Key Chains are a thoughtful and practical gift. Each key chain is custom-made with your choice of name or initials, crafted from high-quality materials. Perfect for birthdays, holidays, or as a special keepsake. A small yet meaningful gesture that shows you care.',
+            featured: false
+        },
+        {
+            id: 'p5',
+            name: 'Mothers Day Hamper',
+            price: 675.00,
+            imageSrc: 'Image/Photo (5).png',
+            altText: 'A personalized mothers day hamper made with love',
+            description: 'Celebrate Mom with a beautifully handcrafted Mother’s Day gift hamper, filled with love and carefully curated goodies. Each item is made with care to bring a smile to her face and warmth to her heart—because she deserves nothing but the best.',
+            featured: false
+        },
+        {
+            id: 'p6',
+            name: 'Wooden Hoop Frames',
+            price: 350.00,
+            imageSrc: 'Image/Photo (6).png',
+            altText: 'A personalized Wodden hoop frame with a unique design',
+            description: 'Our Wooden Hoop Frames are a charming way to display your favorite memories. Each frame is handcrafted with care, featuring a unique design that adds a rustic touch to any space. Perfect for home decor or as a thoughtful gift for loved ones.',
+            featured: false
+        },
+        {
+            id: 'p7',
+            name: 'Customized Dream Catchers (Set of 3)',
+            price: 270.00,
+            imageSrc: 'Image/Photo (7).png',
+            altText: 'A personalized dream catcher with a unique design',
+            description: 'Our Customized Dream Catchers are not just beautiful decor; they are also a symbol of protection and positivity. Each dream catcher is handmade with care, featuring your choice of colors and designs. A perfect gift for anyone who appreciates unique art and good vibes.',
+            featured: false
+        }
+
+    ];
+
+    let cartItems = [];
+
+    function renderProducts() {
+        const productGallery = document.getElementById('productGallery');
+        if (!productGallery) return;
+        productGallery.innerHTML = '';
+        productsData.forEach(product => productGallery.appendChild(createProductElement(product)));
+    }
+
+    function renderFeaturedProducts() {
+        const featuredGallery = document.getElementById('featuredProductGallery');
+        if (!featuredGallery) return;
+        featuredGallery.innerHTML = '';
+        const featured = productsData.filter(p => p.featured).slice(0, 2);
+        (featured.length > 0 ? featured : productsData.slice(0, Math.min(productsData.length, 2)))
+            .forEach(product => featuredGallery.appendChild(createProductElement(product)));
+    }
+
+    function createProductElement(product) {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+        productDiv.setAttribute('data-id', product.id);
+        productDiv.innerHTML = `
+            <img src="${product.imageSrc}" alt="${product.altText}" onclick="showProductDetail('${product.id}')">
+            <h3>${product.name}</h3>
+            <p class="price">₹${product.price.toFixed(2)}</p>
+            <div class="actions">
+                <button onclick="showProductDetail('${product.id}')" class="button button-secondary">View Details</button>
+                <button onclick="addToCart('${product.id}')" class="button">Add to Cart</button>
+            </div>
+        `;
+        return productDiv;
+    }
+
+    const allSections = document.querySelectorAll('section');
+    const productDetailView = document.getElementById('product-detail-view');
+    const navBar = document.querySelector('nav');
+    let navHeight = navBar ? navBar.offsetHeight : 60; // Fallback nav height
+
+    function showSection(sectionId, navElement) {
+        allSections.forEach(sec => sec.classList.remove('active'));
+        productDetailView.style.display = 'none';
+
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+            if (sectionId === 'cart') updateCartDisplay();
+
+            // Scroll adjustment for sticky nav
+            const sectionTop = targetSection.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({ top: sectionTop - navHeight - 15, behavior: 'smooth' });
+        }
+
+        // Remove active-nav class from all nav links
+        document.querySelectorAll('nav a').forEach(link => link.classList.remove('active-nav'));
+
+        // Add active-nav class to the clicked nav element if it exists
+        if (navElement) {
+            navElement.classList.add('active-nav');
+        } else {
+            // If navElement is not provided, try to find the corresponding nav link
+            const navLink = document.querySelector(`nav a[onclick*="showSection('${sectionId}'"]`);
+            if (navLink) {
+                navLink.classList.add('active-nav');
+            }
+        }
+    }
+
+    let lastActiveSectionId = 'home';
+
+    function showProductDetail(productId) {
+        const product = productsData.find(p => p.id === productId);
+        if (!product) return;
+
+        const currentActiveSection = document.querySelector('section.active');
+        if (currentActiveSection && currentActiveSection.id !== 'product-detail-view') {
+            lastActiveSectionId = currentActiveSection.id;
+        }
+
+        allSections.forEach(sec => sec.classList.remove('active'));
+        productDetailView.style.display = 'block';
+        productDetailView.classList.add('active');
+
+        document.getElementById('detailImg').src = product.imageSrc;
+        document.getElementById('detailImg').alt = product.altText;
+        document.getElementById('detailName').textContent = product.name;
+        document.getElementById('detailPrice').textContent = `₹${product.price.toFixed(2)}`;
+        document.getElementById('detailDescription').textContent = product.description;
+        document.getElementById('detailAddToCartBtn').onclick = () => addToCart(product.id);
+
+        const detailViewTop = productDetailView.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({ top: detailViewTop - navHeight - 15, behavior: 'smooth' });
+    }
+
+    function goBackToProducts() {
+        productDetailView.style.display = 'none';
+        productDetailView.classList.remove('active');
+        const sectionToShow = document.getElementById(lastActiveSectionId) ? lastActiveSectionId : 'products';
+        const navElementForLastSection = document.querySelector(`nav a[onclick*="showSection('${sectionToShow}'"]`);
+        showSection(sectionToShow, navElementForLastSection);
+    }
+
+    function showCartNotification(productName) {
+        let notification = document.querySelector('.cart-notification');
+        if (!notification) {
+            notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            document.body.appendChild(notification);
+        }
+        notification.textContent = `${productName} added to cart!`;
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 2500);
+    }
+
+    function addToCart(productId) {
+        const product = productsData.find(p => p.id === productId);
+        if (!product) return;
+
+        const existingItem = cartItems.find(item => item.id === productId);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cartItems.push({ ...product, quantity: 1 });
+        }
+        showCartNotification(product.name);
+        updateCartDisplay();
+        updateCartIcon();
+    }
+
+    function updateCartQuantity(productId, change) {
+        const itemInCart = cartItems.find(item => item.id === productId);
+        if (itemInCart) {
+            itemInCart.quantity += change;
+            if (itemInCart.quantity <= 0) removeFromCart(productId);
+            else updateCartDisplay();
+        }
+        updateCartIcon();
+    }
+
+    function removeFromCart(productId) {
+        cartItems = cartItems.filter(item => item.id !== productId);
+        updateCartDisplay();
+        updateCartIcon();
+    }
+
+    function calculateCartTotal() {
+        return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }
+
+    function updateCartIcon() {
+        const cartItemCountElement = document.getElementById('cartItemCount');
+        const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        cartItemCountElement.textContent = totalItems;
+        cartItemCountElement.style.display = totalItems > 0 ? 'inline-block' : 'none';
+    }
+
+    function updateCartDisplay() {
+        const cartContentEl = document.getElementById('cartContent');
+        const cartSummaryActionsEl = document.getElementById('cartSummaryActions');
+        const cartTotalSpan = cartSummaryActionsEl.querySelector('#cartTotal span');
+        const emptyCartMessageEl = document.getElementById('emptyCartMessage');
+
+        cartContentEl.innerHTML = '';
+
+        if (cartItems.length === 0) {
+            cartContentEl.style.display = 'none';
+            cartSummaryActionsEl.style.display = 'none';
+            emptyCartMessageEl.style.display = 'block';
+        } else {
+            cartContentEl.style.display = 'block';
+            cartSummaryActionsEl.style.display = 'flex'; // It's a flex container
+            emptyCartMessageEl.style.display = 'none';
+
+            cartItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <img src="${item.imageSrc}" alt="${item.altText}">
+                    <div class="cart-item-details-wrapper">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p class="unit-price">Unit Price: ₹${item.price.toFixed(2)}</p>
+                        </div>
+                        <div class="cart-item-controls">
+                            <div class="cart-item-quantity">
+                                <button onclick="updateCartQuantity('${item.id}', -1)" aria-label="Decrease quantity of ${item.name}">−</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateCartQuantity('${item.id}', 1)" aria-label="Increase quantity of ${item.name}">+</button>
+                            </div>
+                            <div class="cart-item-remove">
+                                <button onclick="removeFromCart('${item.id}')">Remove</button>
+                            </div>
+                        </div>
+                        <p class="cart-item-subtotal">Subtotal: ₹${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                `;
+                cartContentEl.appendChild(itemElement);
+            });
+            cartTotalSpan.textContent = calculateCartTotal().toFixed(2);
+        }
+        updateCartIcon();
+    }
+
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            alert('Welcome, ' + user + '! (This is just a demo login.)');
+            this.reset();
+        });
+    }
+    // Update navHeight if window resizes (e.g., dev tools open/close, orientation change)
+    window.addEventListener('resize', () => {
+        navHeight = navBar ? navBar.offsetHeight : 60;
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        navHeight = navBar ? navBar.offsetHeight : 60; // Initial calculation
+        renderProducts();
+        renderFeaturedProducts();
+        const homeNavLink = document.querySelector('nav a[onclick*="home"]');
+        showSection('home', homeNavLink); // Show home section by default
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        updateCartDisplay();
+        updateCartIcon();
+    });
+</script>
+
+</body>
+</html>
